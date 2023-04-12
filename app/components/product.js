@@ -11,9 +11,7 @@ export default class ItemComponent extends Component {
   @tracked zoom = false;
 
   get productImage() {
-    const { image } = this.args.product.colors.find(({
-      color
-    }) => color === this.color);
+    const { image } = this.args.product.colors.find(({color}) => color === this.color);
     return image;
   }
 
