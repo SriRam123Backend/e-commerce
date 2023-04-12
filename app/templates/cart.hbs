@@ -1,6 +1,5 @@
 <main class="container mt-5">
-  <h1>Shopping Cart</h1>
-
+    <h1>Shopping Cart</h1>
   <nav>
     <ol class="breadcrumb">
       <li class="breadcrumb-item">
@@ -13,7 +12,8 @@
   </nav>
   <hr>
 
-  {{#each cart.cartList as |item|}}
+  {{#each this.cart.cartList as |item|}}
+    {{log item}}
     <div class="cart-item d-flex align-items-center">
       <div class="cart-item-thumbnail">
         <img src={{item.image}}>
