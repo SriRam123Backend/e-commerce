@@ -1,2 +1,7 @@
-{{page-title "Index"}}
-{{outlet}}
+<CartContainer>
+
+  {{#each this.model as |product|}}
+    <Product @product={{product}}/>
+  {{/each}}
+
+</CartContainer>
