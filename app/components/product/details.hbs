@@ -1,6 +1,6 @@
 <div class="product-details">
 
-  <!-- Item Header -->
+  {{!-- Item Header --}}
   <section>
     <h3>{{@product.name}}</h3>
     <div class="text-warning">
@@ -12,7 +12,7 @@
     </div>
   </section>
 
-  <!-- Price -->
+  {{!-- Price --}}
   {{#if @isDetails}}
     <section>
       <del class="small text-black-50">{{currency @product.price.original}}</del>
@@ -26,13 +26,13 @@
   {{/if}}
 
   {{#if @isDetails}}
-    <!-- Item description -->
+    {{!-- Item description --}}
     <section>
       <h5>Description</h5>
       <p>{{@product.description}}</p>
     </section>
 
-    <!-- Actions -->
+    {{!-- Actions --}}
     <section class="d-flex justify-content-between align-items-end">
       <div>
         <h5>Color</h5>

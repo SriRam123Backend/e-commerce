@@ -1,5 +1,5 @@
 import Component from '@glimmer/component';
-import { tracked } from "@glimmer/tracking";
+import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
 
@@ -11,7 +11,9 @@ export default class ItemComponent extends Component {
   @tracked zoom = false;
 
   get productImage() {
-    const { image } = this.args.product.colors.find(({color}) => color === this.color);
+    const { image } = this.args.product.colors.find(
+      ({ color }) => color === this.color
+    );
     return image;
   }
 
