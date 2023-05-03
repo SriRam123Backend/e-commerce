@@ -30,14 +30,13 @@ export default class CartService extends Service {
         .then((response, textStatus, xhr) => {
           if (xhr.status === 200 && textStatus === 'success') {
             let cartProduct = JSON.parse(response);
-            let productsArray = cartProduct.cart.products;
-            console.log(cartProduct);
-            this.store.pushPayload({ products: productsArray});
-            // console.log(newCart);
-            // this.store.pushPayload({ cart: newCart });
-            // let summa = this.store.peekRecord('cart', '1');
-            // console.log(summa);
-            // console.log(summa.products);
+            let productsArray = cartProduct.products;
+             console.log(cartProduct);
+            this.store.pushPayload({ cart: cartProduct.cart});
+            this.store.pushPayload({ products: productsArray})
+            let allCartProducts = this.store.peekRecord('cart', cartProduct.cart.id);
+            console.log(allCartProducts);
+            console.log(allCartProducts.products.toArray());
           }
         })
         .catch((error) => {
