@@ -1,0 +1,10 @@
+<form onsubmit="event.preventDefault();">
+    <Username-password-fields>
+    <label>Email-ID: </label><input type="email" name="email-id" id="email" />
+    <span id="emailErrorMessage" style="display:none;color:red;height: 1px;" >invalid mailid</span><br><br>
+    <br>
+    <label>Date of Birth: </label><input type="date" name="date" id="dob" /><br>
+    </Username-password-fields>
+    <button type="submit"  {{on "click" this.sendData}} >Sign Up</button>
+    <p>Do have an account? <LinkTo @route="sign-in">Sign In</LinkTo></p>
+</form>

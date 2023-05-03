@@ -1,0 +1,5 @@
+<form onsubmit="event.preventDefault();">
+    <Username-password-fields/>
+    <button type="submit" {{on 'click' this.login}}>Sign In</button>
+    <p>Don't have an account? <LinkTo @route="sign-up">Sign Up</LinkTo></p>
+</form>
