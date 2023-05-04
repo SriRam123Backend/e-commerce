@@ -17,11 +17,12 @@ export default class ProductPageRoute extends Route {
         console.log(xhr.status);
         if (xhr.status === 200 && textStatus === 'success') {
           let productDetails = JSON.parse(response);
+          this.store.pushPayload({colors : productDetails.colors});
           this.store.pushPayload({ products: productDetails.products });
         }
       })
       .catch((error) => {
-        alert(error);
+        console.log(error);
       });
   }
 

@@ -1,5 +1,3 @@
 import JSONAPIAdapter from '@ember-data/adapter/json-api';
 
-export default class ProductAdapter extends JSONAPIAdapter {
-    
-}
+export default class ProductAdapter extends JSONAPIAdapter {}

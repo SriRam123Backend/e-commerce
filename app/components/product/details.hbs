@@ -46,14 +46,17 @@
         </div>
       </div>
       <div>
-        <button
-          type="button"
-          class="btn btn-info"
-          {{on "click" this.addToCart}}
-        >
-          <i class="fa fa-shopping-cart mr-1" aria-hidden="true"></i>
+        {{#if @cartDetails}}
+           <button type="button" class="btn btn-info" {{on "click" this.alert}}>
+            <i class="fa fa-shopping-cart mr-1" aria-hidden="true"></i>
+          Added to cart
+        </button>
+        {{else}}
+          <button type="button" class="btn btn-info" {{on "click" this.addToCart}}>
+             <i class="fa fa-shopping-cart mr-1" aria-hidden="true"></i>
           Add to cart
         </button>
+        {{/if}}
       </div>
     </section>
   {{/if}}

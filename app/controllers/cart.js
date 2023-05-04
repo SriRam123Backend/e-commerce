@@ -7,7 +7,7 @@ export default class CartController extends Controller {
 
   get subtotal() {
     return this.cart.cartList.reduce((total, item) => {
-      return total + item.price.current * item.count;
+      return total + parseFloat(item.price.current);
     }, 0);
   }
 
