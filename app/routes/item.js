@@ -14,6 +14,6 @@ export default class ItemRoute extends Route {
 
   setupController(controller, model) {
     super.setupController(controller, model);
-    controller.color = model.colors[0].color;
+    controller.color = model.colors.toArray()[0].color;
   }
 }

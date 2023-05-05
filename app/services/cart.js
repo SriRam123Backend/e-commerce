@@ -4,23 +4,9 @@ import { inject as service } from '@ember/service';
 
 export default class CartService extends Service {
   @service store;
-  @tracked cartList = [];
+  @tracked cartList;
   @tracked currentcustomer;
   add(item, color) {
-    const data = this.store.peekRecord('cart', '1');
-    let existingItem = false;
-    if (data != null) {
-      console.log(data.products);
-      let pro = data.products.toArray();
-      console.log(pro);
-      existingItem = pro.some((products) => {
-        return products.id === String(item.id);
-      });
-    }
-    console.log(existingItem);
-    if (existingItem) {
-      alert('This product is already in the cart');
-    } else {
       let details = {};
       details.productId = Number(item.id);
       details.userId = this.currentcustomer.id;
@@ -37,21 +23,17 @@ export default class CartService extends Service {
         .then((response, textStatus, xhr) => {
           if (xhr.status === 200 && textStatus === 'success') {
             let cartProduct = JSON.parse(response);
-            let productsArray = cartProduct.products;
-            if (this.cartList.length < 2) {
-              this.store.pushPayload({ cart: cartProduct.cart });
-              this.store.pushPayload({ products: productsArray });
-            } else {
-              let cartStore = this.store.peekRecord('cart', 1);
-              cartStore.products = productsArray;
-            }
-            this.cartList = productsArray;
+            let productsArray = cartProduct.products.products;
+                this.cartList = this.store.push( this.store.normalize('cart',cartProduct.cart));
+                this.store.pushPayload({ products: productsArray });
+                cartProduct.products.colors.map((col) => {
+                      this.store.pushPayload({colors : col});
+                })
           }
         })
         .catch((error) => {
           console.log(error);
         });
-    }
   }
 
   remove(item) {
@@ -69,12 +51,7 @@ export default class CartService extends Service {
     })
       .then((response, textStatus, xhr) => {
         if (xhr.status === 200 && textStatus === 'success') {
-          const index = this.cartList.indexOf(item);
-          const cartList = this.cartList;
-          cartList.splice(index, 1);
-          this.cartList = cartList;
-          let cartStore = this.store.peekRecord('cart', 1);
-          cartStore.products = cartList;
+           
         }
       })
       .catch((error) => {

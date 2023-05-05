@@ -11,25 +11,21 @@
     </ol>
   </nav>
   <hr>
-  {{#each this.cart.cartList as |item|}}
-  {{#each item.colors as |img|}}
-  {{log "logged"}}
-  {{log img.image }}
-  {{/each}}
-    {{!-- <div id="space-between" class="cart-item d-flex align-items-center">
+  {{#each this.cart.cartList.colors as |productColor|}}
+    {{log productColor.product.name}}
+    <div id="space-between" class="cart-item d-flex align-items-center">
       <div class="cart-item-thumbnail">
-        <img src={{item.colors.firstObject.image}}>
+        <img src={{this.image productColor.color}}>
       </div>
       <div class="ml-3">
-        <h4>{{item.name}}</h4>
+        <h4>{{productColor.product.name}}</h4>
         <div>
-          <del class="small text-black-50">{{currency item.price.original}}</del>
-          <i class="text-danger font-weight-bold">{{currency item.price.current}}</i>
+          <del class="small text-black-50">{{currency productColor.product.price.original}}</del>
+          <i class="text-danger font-weight-bold">{{currency productColor.product.price.current}}</i>
         </div>
       </div>
-      <button class="ml-3" type="button" {{on "click" (fn this.removeItem item)}}>&times;</button>
-    </div> --}}
-
+      <button class="ml-3" type="button" {{on "click" (fn this.removeItem productColor.product)}}>&times;</button>
+    </div>
     <hr>
   {{/each}}
 
