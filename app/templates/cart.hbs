@@ -11,6 +11,7 @@
     </ol>
   </nav>
   <hr>
+ {{#if this.cart.cartList.colors}}
   {{#each this.cart.cartList.colors as |productColor|}}
     <div id="space-between" class="cart-item d-flex align-items-center">
       <div class="cart-item-thumbnail">
@@ -27,7 +28,6 @@
     </div>
     <hr>
   {{/each}}
-
   <section class="w-50 ml-auto text-right mb-5">
     <div class="row">
       <span class="col">Subtotal</span>
@@ -46,4 +46,7 @@
   <button type="button" class="btn btn-success float-right">
     Check out
   </button>
+  {{else}}
+   <img src="https://www.kindpng.com/picc/m/174-1749396_empty-cart-your-cart-is-empty-hd-png.png" class="align"/>
+  {{/if}}
 </main>
