@@ -6,9 +6,10 @@ export default class CartController extends Controller {
   @service cart;
 
   get subtotal() {
-    return this.cart.cartList.products.toArray().reduce((total, item) => {
-      return total + parseFloat(item.price.current);
-    }, 0);
+    // return this.cart.cartList.products.toArray().reduce((total, item) => {
+    //   return total + parseFloat(item.price.current);
+    // }, 0);
+    return 0;
   }
 
   get tax() {
