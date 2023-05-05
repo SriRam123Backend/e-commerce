@@ -3,7 +3,7 @@ import { inject as service } from '@ember/service';
 
 export default class ProductPageRoute extends Route {
   @service store;
-  @service cart
+  @service cart;
 
   async beforeModel() {
     $.ajax({
@@ -22,17 +22,18 @@ export default class ProductPageRoute extends Route {
           let productDetails = JSON.parse(response);
           this.store.pushPayload({ products: productDetails.products });
           productDetails.colors.map((col) => {
-            this.store.pushPayload({colors : col});
-          })
-          if(productDetails?.cart.products.products != undefined)
-          {
+            this.store.pushPayload({ colors: col });
+          });
+          if (productDetails?.cart.products.products != undefined) {
             let cartProduct = productDetails.cart;
             let productsArray = cartProduct.products.products;
-                this.cart.cartList = this.store.push( this.store.normalize('cart',cartProduct.cart));
-                this.store.pushPayload({ products: productsArray });
-                cartProduct.products.colors.map((col) => {
-                      this.store.pushPayload({colors : col});
-              })
+            this.cart.cartList = this.store.push(
+              this.store.normalize('cart', cartProduct.cart)
+            );
+            this.store.pushPayload({ products: productsArray });
+            cartProduct.products.colors.map((col) => {
+              this.store.pushPayload({ colors: col });
+            });
           }
         }
       })

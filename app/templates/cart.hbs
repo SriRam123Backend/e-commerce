@@ -24,7 +24,7 @@
           <i class="text-danger font-weight-bold">{{currency productColor.product.price.current}}</i>
         </div>
       </div>
-      <button class="ml-3" type="button" {{on "click" (fn this.removeItem productColor.product)}}>&times;</button>
+      <button class="ml-3" type="button" {{on "click" (fn this.removeItem productColor.id)}}>&times;</button>
     </div>
     <hr>
   {{/each}}

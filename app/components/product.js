@@ -19,15 +19,23 @@ export default class ItemComponent extends Component {
     return image;
   }
 
-  @computed('cart.cartList.length', 'args.id','color')
+  @computed(
+    'args.{id,product}',
+    'cart.cartList.{colors,length,products}',
+    'color'
+  )
   get cartThings() {
     const product = this.args.product;
     let productList = this.cart.cartList?.products.toArray();
-    const item = productList?.find((cartproduct) => cartproduct.id == product.id);
+    const item = productList?.find(
+      (cartproduct) => cartproduct.id == product.id
+    );
     if (!item) {
-        return false;
-      }
-      return this.cart.cartList.colors.toArray().some(product => product.color == this.color);
+      return false;
+    }
+    return this.cart.cartList.colors
+      .toArray()
+      .some((product) => product.color == this.color);
   }
 
   @action

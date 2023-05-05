@@ -6,10 +6,9 @@ export default class CartController extends Controller {
   @service cart;
 
   get subtotal() {
-    // return this.cart.cartList.products.toArray().reduce((total, item) => {
-    //   return total + parseFloat(item.price.current);
-    // }, 0);
-    return 0;
+    return this.cart.cartList.products.toArray().reduce((total, item) => {
+      return total + parseFloat(item.price.current);
+    }, 0);
   }
 
   get tax() {
@@ -21,11 +20,11 @@ export default class CartController extends Controller {
   }
 
   @action
-  image(args)
-  {
-    let img = this.cart.cartList.colors.toArray().filter(img => img.color == args);
+  image(args) {
+    let img = this.cart.cartList.colors
+      .toArray()
+      .filter((img) => img.color == args);
     return img[0].image;
-
   }
 
   @action
@@ -37,8 +36,7 @@ export default class CartController extends Controller {
   }
 
   @action
-  removeItem(item) {
-    this.cart.remove(item);
+  removeItem(id) {
+    this.cart.remove(id);
   }
-
 }

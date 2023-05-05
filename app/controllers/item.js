@@ -3,5 +3,4 @@ import { inject as service } from '@ember/service';
 
 export default class ItemController extends Controller {
   @service cart;
-
 }

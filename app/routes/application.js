@@ -24,9 +24,9 @@ export default class ApplicationRoute extends Route {
           this.store.pushPayload({
             user: userdatum,
           });
+          this.cart.currentcustomer = this.currentUser;
           this.router.transitionTo('product-page');
         }
-        this.cart.currentcustomer = this.currentUser;
       })
       .catch((error) => {
         this.router.transitionTo('index');

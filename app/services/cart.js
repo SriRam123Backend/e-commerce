@@ -7,36 +7,38 @@ export default class CartService extends Service {
   @tracked cartList;
   @tracked currentcustomer;
   add(item, color) {
-      let details = {};
-      details.productId = Number(item.id);
-      details.userId = this.currentcustomer.id;
-      details.color = color;
-      $.ajax({
-        method: 'POST',
-        url: '/e_commerce/cart',
-        data: JSON.stringify(details),
-        contentType: 'application/json',
-        headers: {
-          'X-Requested-With': 'XMLHttpRequest',
-        },
+    let details = {};
+    details.productId = Number(item.id);
+    details.userId = this.currentcustomer.id;
+    details.color = color;
+    $.ajax({
+      method: 'POST',
+      url: '/e_commerce/cart',
+      data: JSON.stringify(details),
+      contentType: 'application/json',
+      headers: {
+        'X-Requested-With': 'XMLHttpRequest',
+      },
+    })
+      .then((response, textStatus, xhr) => {
+        if (xhr.status === 200 && textStatus === 'success') {
+          let cartProduct = JSON.parse(response);
+          let productsArray = cartProduct.products.products;
+          this.cartList = this.store.push(
+            this.store.normalize('cart', cartProduct.cart)
+          );
+          this.store.pushPayload({ products: productsArray });
+          cartProduct.products.colors.map((col) => {
+            this.store.pushPayload({ colors: col });
+          });
+        }
       })
-        .then((response, textStatus, xhr) => {
-          if (xhr.status === 200 && textStatus === 'success') {
-            let cartProduct = JSON.parse(response);
-            let productsArray = cartProduct.products.products;
-                this.cartList = this.store.push( this.store.normalize('cart',cartProduct.cart));
-                this.store.pushPayload({ products: productsArray });
-                cartProduct.products.colors.map((col) => {
-                      this.store.pushPayload({colors : col});
-                })
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
-  remove(item) {
+  remove(id) {
     // let details = {};
     // details.productId = Number(id);
     // details.userId = this.currentcustomer.id;
@@ -67,8 +69,9 @@ export default class CartService extends Service {
     //   .catch((error) => {
     //     console.log(error);
     //   });
-    
-    item.destroyRecord();
-    
+
+    let product = this.store.peekRecord('color', id);
+    product.deleteRecord();
+    product.save();
   }
 }
