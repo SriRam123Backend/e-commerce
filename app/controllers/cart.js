@@ -36,8 +36,8 @@ export default class CartController extends Controller {
   }
 
   @action
-  removeItem(item) {
-    this.cart.remove(item);
+  removeItem(id,color) {
+    this.cart.remove(id,color);
   }
 
 }

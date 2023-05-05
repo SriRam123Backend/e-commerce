@@ -36,13 +36,14 @@ export default class CartService extends Service {
         });
   }
 
-  remove(item) {
+  remove(id,color) {
     let details = {};
-    details.productId = Number(item.id);
+    details.productId = Number(id);
     details.userId = this.currentcustomer.id;
+    details.color = color;
     $.ajax({
       method: 'POST',
-      url: '/e_commerce/removeFromCart',
+      url: '/e_commerce/remove',
       data: JSON.stringify(details),
       contentType: 'application/json',
       headers: {
@@ -51,7 +52,13 @@ export default class CartService extends Service {
     })
       .then((response, textStatus, xhr) => {
         if (xhr.status === 200 && textStatus === 'success') {
-           
+          let cartProduct = JSON.parse(response);
+          let productsArray = cartProduct.products.products;
+              this.cartList = this.store.push( this.store.normalize('cart',cartProduct.cart));
+              this.store.pushPayload({ products: productsArray });
+              cartProduct.products.colors.map((col) => {
+                    this.store.pushPayload({colors : col});
+              })
         }
       })
       .catch((error) => {
