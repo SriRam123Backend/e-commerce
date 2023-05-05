@@ -67,7 +67,8 @@ export default class CartService extends Service {
     //   .catch((error) => {
     //     console.log(error);
     //   });
-    item.destoryRecord();
+    
+    item.destroyRecord();
     
   }
 }
