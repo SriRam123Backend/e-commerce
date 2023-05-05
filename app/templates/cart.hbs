@@ -12,7 +12,6 @@
   </nav>
   <hr>
   {{#each this.cart.cartList.colors as |productColor|}}
-    {{log productColor.product.name}}
     <div id="space-between" class="cart-item d-flex align-items-center">
       <div class="cart-item-thumbnail">
         <img src={{this.image productColor.color}}>
