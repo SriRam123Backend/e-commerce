@@ -7,7 +7,6 @@ export default class ApplicationRoute extends Route {
   @service router;
   @service cart;
 
-  @tracked currentUser;
   async beforeModel() {
     $.ajax({
       method: 'POST',
@@ -20,11 +19,10 @@ export default class ApplicationRoute extends Route {
         if (xhr.status === 202 && textStatus === 'success') {
           let userData = JSON.parse(response);
           let userdatum = JSON.parse(userData.user);
-          this.currentUser = userdatum;
           this.store.pushPayload({
             user: userdatum,
           });
-          this.cart.currentcustomer = this.currentUser;
+          this.cart.currentcustomer = userdatum;
           this.router.transitionTo('product-page');
         }
       })
