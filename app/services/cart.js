@@ -39,7 +39,7 @@ export default class CartService extends Service {
   }
 
   remove(id) {
-    let product = this.store.peekRecord('color',id);
+    let product = this.store.peekRecord('color', id);
     product.save();
     product.cart = null;
   }

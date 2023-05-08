@@ -4,6 +4,12 @@ import { inject as service } from '@ember/service';
 export default class ItemRoute extends Route {
   @service store;
   @service cart;
+  @service product;
+
+
+  async beforeModel() {
+    return this.product.productLoad();
+  }
 
   async model(params) {
     const { item_id } = params;

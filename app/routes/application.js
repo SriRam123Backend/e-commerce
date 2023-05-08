@@ -8,7 +8,7 @@ export default class ApplicationRoute extends Route {
   @service cart;
 
   async beforeModel() {
-  return $.ajax({
+    return $.ajax({
       method: 'POST',
       url: '/e_commerce/cookie',
       headers: {
@@ -23,7 +23,10 @@ export default class ApplicationRoute extends Route {
             user: userdatum,
           });
           this.cart.currentcustomer = userdatum;
-          this.router.transitionTo('product-page');
+          if(this._router.url == '/sign-in' || this._router.url == '/sign-up' || this._router.url == '/')
+          {
+            this.router.transitionTo('product-page');
+          }
         }
       })
       .catch((error) => {
