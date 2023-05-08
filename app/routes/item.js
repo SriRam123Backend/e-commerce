@@ -7,7 +7,7 @@ export default class ItemRoute extends Route {
 
   async model(params) {
     const { item_id } = params;
-    const data = await this.store.findAll('product');
+    const data = await this.store.peekAll('product');
     const product = data.find(({ id }) => id === item_id);
     return product;
   }
