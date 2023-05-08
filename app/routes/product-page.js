@@ -6,7 +6,7 @@ export default class ProductPageRoute extends Route {
   @service cart;
 
   async beforeModel() {
-    $.ajax({
+   return $.ajax({
       method: 'POST',
       url: '/e_commerce/products',
       contentType: 'application/x-www-form-urlencoded',

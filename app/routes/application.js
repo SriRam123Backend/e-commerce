@@ -8,7 +8,7 @@ export default class ApplicationRoute extends Route {
   @service cart;
 
   async beforeModel() {
-    $.ajax({
+  return $.ajax({
       method: 'POST',
       url: '/e_commerce/cookie',
       headers: {
