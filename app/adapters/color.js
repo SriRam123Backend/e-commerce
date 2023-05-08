@@ -5,7 +5,8 @@ export default class ColorAdapter extends JSONAPIAdapter {
 
     @service cart;
 
-    urlForDeleteRecord(id,store,model,record) {
-        return `http://localhost:4200/e_commerce/delete?id=${id}&productId=${model.record.product.content.id}&userId=${this.cart.currentcustomer.id}`;
+    buildURL(modelName, id, snapshot, requestType, query) {
+        const url = `http://localhost:4200/e_commerce/delete?id=${id}&productId=${snapshot.record.product.content.id}&userId=${this.cart.currentcustomer.id}`;
+        return url;
       }
 }
